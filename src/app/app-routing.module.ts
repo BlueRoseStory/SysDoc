@@ -1,13 +1,34 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [
-  { path: 'home', component: HomeComponent }
+import { AuthGuard } from './user/auth-guard.service';
+
+import { ShellComponent } from './home/shell.component';
+import { WelcomeComponent } from './home/welcome.component';
+import { PageNotFoundComponent } from './home/page-not-found.component';
+
+const appRoutes: Routes = [
+  {
+    path: '',
+    component: ShellComponent,
+    children: [
+      { path: 'welcome', component: WelcomeComponent },
+      {
+        path: 'books',
+        // canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('./books/book.module').then(m => m.BookModule)
+      },
+      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+    ]
+  },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(appRoutes)
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
