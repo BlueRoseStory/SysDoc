@@ -4,7 +4,7 @@ import { Book } from '../book';
 @Component({
   selector: 'pm-book-list',
   templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.css'],
+  styleUrls: ['./book-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookListComponent {

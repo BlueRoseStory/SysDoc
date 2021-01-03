@@ -1,5 +1,5 @@
 <div *ngFor="let book of books">
-  <button class="list-group-item list-group-item-action rounded-0" [ngClass]="{'active': book?.id === selectedBook?.id}"
+  <button mat-button class="list-group-item list-group-item-action rounded-0" [ngClass]="{'active': book?.id === selectedBook?.id}"
     (click)="bookSelected(book)">{{ book.title }}
   </button>
 </div>
